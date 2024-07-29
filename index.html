@@ -1,0 +1,465 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Eti Dhanush - Portfolio</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--primary-color: MidnightBlue;
+			--secondary-color: RoyalBlue;
+			--accent-color: Gold;
+			--text-color: Ivory;
+			--background-color: Black;
+		}
+
+		body, html {
+			margin: 0;
+			padding: 0;
+			font-family: 'fantasy', serif;
+			color: var(--text-color);
+			background-color: var(--background-color);
+			line-height: 1.6;
+			scroll-behavior: smooth;
+			font-size: 18px;
+		}
+
+		#wrapper {
+			max-width: 100%;
+			margin: 0 auto;
+		}
+
+		.banner {
+			background-image: url('images/banner.jpg');
+			background-size: cover;
+			background-position: center;
+			color: white;
+			padding: 200px 0;
+			text-align: center;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.banner::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: rgba(25, 25, 112, 0.7);
+			animation: pulse 4s infinite alternate;
+		}
+
+		/* Stars */
+		.star {
+			position: absolute;
+			width: 2px;
+			height: 2px;
+			background: white;
+			border-radius: 50%;
+			animation: twinkle 3s infinite;
+		}
+
+		@keyframes twinkle {
+			0%, 100% {
+				opacity: 0.8;
+			}
+			50% {
+				opacity: 0.2;
+			}
+		}
+
+		/* Moon */
+		.moon {
+			position: absolute;
+			width: 80px;
+			height: 80px;
+			background: white;
+			border-radius: 50%;
+			top: 50px;
+			left: 80%;
+			transform: translateX(-50%);
+			box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+		}
+
+		.banner-content {
+			position: relative;
+			z-index: 1;
+		}
+
+		.banner h1 {
+			font-size: 5em;
+			margin-bottom: 20px;
+			font-weight: 700;
+			letter-spacing: 2px;
+			animation: fadeInDown 1s ease-out;
+			font-family: 'Playfair Display', serif;
+			text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+		}
+
+		.banner p {
+			font-size: 1.8em;
+			max-width: 800px;
+			margin: 0 auto;
+			animation: fadeInUp 1s ease-out 0.5s both;
+		}
+
+		nav {
+			background-color: var(--primary-color);
+			padding: 20px 0;
+			position: sticky;
+			top: 0;
+			z-index: 100;
+		}
+
+		nav ul {
+			list-style-type: none;
+			padding: 0;
+			margin: 0;
+			display: flex;
+			justify-content: center;
+		}
+
+		nav ul li {
+			margin: 0 15px;
+		}
+
+		nav ul li a {
+			color: white;
+			text-decoration: none;
+			font-weight: 600;
+			font-size: 1.2em;
+			transition: all 0.3s ease;
+			padding: 10px 15px;
+			border-radius: 5px;
+		}
+
+		nav ul li a:hover {
+			background-color: var(--secondary-color);
+			transform: translateY(-3px);
+			box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+		}
+
+		.section {
+			padding: 100px 20px;
+			max-width: 1200px;
+			margin: 0 auto;
+			opacity: 0;
+			transform: translateY(20px);
+			transition: opacity 0.5s ease, transform 0.5s ease;
+			background-color: rgba(255, 255, 255, 0.05);
+			border-radius: 10px;
+		}
+
+		.section.visible {
+			opacity: 1;
+			transform: translateY(0);
+		}
+
+		.section h2 {
+			color: var(--accent-color);
+			font-size: 3em;
+			margin-bottom: 30px;
+			text-align: center;
+			font-weight: 600;
+			letter-spacing: 2px;
+		}
+
+		.content {
+			display: flex;
+			flex-wrap: nowrap;
+			justify-content: space-between;
+		}
+
+		.content-item {
+			flex-basis: calc(50% - 20px);
+			margin-bottom: 40px;
+			background-color: rgba(255, 255, 255, 0.1);
+			padding: 30px;
+			border-radius: 10px;
+			box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+			transition: all 0.3s ease;
+			color: var(--text-color);
+		}
+
+		.content-item:hover {
+			transform: translateY(-10px);
+			box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+		}
+
+		.content-item h3 {
+			font-size: 1.8em;
+			margin-bottom: 20px;
+			color: var(--secondary-color);
+		}
+
+		.skills {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+		}
+
+		.skill-item {
+			background-color: rgba(255, 255, 255, 0.1);
+			color: var(--text-color);
+			padding: 30px;
+			margin: 15px;
+			border-radius: 10px;
+			text-align: center;
+			flex-basis: calc(25% - 30px);
+			transition: all 0.3s ease;
+			box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+		}
+
+		.skill-item:hover {
+			transform: scale(1.05) rotate(3deg);
+			background-color: var(--primary-color);
+		}
+
+		.skill-item h3 {
+			font-size: 1.5em;
+			margin-bottom: 15px;
+		}
+
+		.contact-form {
+			max-width: 800px;
+			margin: 0 auto;
+			background-color: rgba(255, 255, 255, 0.1);
+			padding: 40px;
+			border-radius: 10px;
+			box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+		}
+
+		.contact-form input,
+		.contact-form textarea {
+			width: 100%;
+			padding: 15px;
+			margin-bottom: 20px;
+			border: 2px solid #ddd;
+			border-radius: 5px;
+			font-size: 1em;
+			transition: all 0.3s ease;
+			background-color: rgba(255, 255, 255, 0.2);
+			color: var(--text-color);
+		}
+
+		.contact-form input:focus,
+		.contact-form textarea:focus {
+			border-color: var(--secondary-color);
+			box-shadow: 0 0 10px rgba(65, 105, 225, 0.3);
+		}
+
+		.contact-form button {
+			background-color: var(--primary-color);
+			color: white;
+			padding: 15px 30px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			font-size: 1.2em;
+			font-weight: 600;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+
+		.contact-form button:hover {
+			background-color: var(--secondary-color);
+			transform: translateY(-3px);
+			box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+		}
+
+		footer {
+			background-color: var(--primary-color);
+			color: white;
+			text-align: center;
+			padding: 40px 0;
+		}
+
+		.social-icons {
+			margin-top: 20px;
+		}
+
+		.social-icons a {
+			color: white;
+			font-size: 2em;
+			margin: 0 15px;
+			text-decoration: none;
+			transition: all 0.3s ease;
+		}
+
+		.social-icons a:hover {
+			color: var(--accent-color);
+			transform: translateY(-5px);
+		}
+
+		@keyframes fadeInDown {
+			from {
+				opacity: 0;
+				transform: translateY(-50px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@keyframes fadeInUp {
+			from {
+				opacity: 0;
+				transform: translateY(50px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@keyframes pulse {
+			from {
+				opacity: 0.6;
+			}
+			to {
+				opacity: 0.8;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div id="wrapper">
+		<section class="banner">
+			<div class="star" style="top: 10%; left: 20%;"></div>
+			<div class="star" style="top: 20%; left: 30%;"></div>
+			<div class="star" style="top: 15%; left: 40%;"></div>
+			<div class="star" style="top: 25%; left: 50%;"></div>
+			<div class="star" style="top: 10%; left: 60%;"></div>
+			<div class="star" style="top: 20%; left: 70%;"></div>
+			<div class="star" style="top: 15%; left: 80%;"></div>
+			<div class="star" style="top: 25%; left: 90%;"></div>
+			<div class="moon"></div>
+			<div class="banner-content">
+				<h1>Eti Dhanush</h1>
+				<p>Computer Science and Engineering Student at NIT Warangal</p>
+			</div>
+		</section>
+
+		<nav>
+			<ul>
+				<li><a href="#about">About</a></li>
+				<li><a href="#experience">Experience</a></li>
+				<li><a href="#projects">Projects</a></li>
+				<li><a href="#skills">Skills</a></li>
+				<li><a href="#contact">Contact</a></li>
+			</ul>
+		</nav>
+
+		<section id="about" class="section">
+			<h2>About Me</h2>
+			<div style="display: flex; align-items: center;">
+				<img src="profile pic.jpeg" alt="Eti Dhanush" style=" width: 500px; height: 400px; margin-right: 20px;">
+				<p>Pre Final-year B.Tech student at NIT Warangal, deeply passionate about Entrepreneurship, Management, AI/ML, and the Pursuit of Excellence. Former House Captain, adept at Organization and Event Management. Thriving on surprising people and initiating innovation, I'm driven by the desire to explore new horizons and make a meaningful impact.</p>
+			</div>
+		</section>
+
+		<section id="experience" class="section">
+			<h2>Professional Experience</h2>
+			<div class="content">
+				<div class="content-item">
+					<h3>WorldQuant - Quant Research Consultant</h3>
+					<p>Conducting quantitative research and analysis to generate investment strategies. Developing and implementing mathematical models and algorithms to generate trading signals. Utilizing programming languages such as C++ and Python to implement and optimize trading strategies.</p>
+				</div>
+				<div class="content-item">
+					<h3>Research Intern - NIT Warangal</h3>
+					<p>Worked on the comparison and implementation of PSO-RL (Particle Swarm Optimization with Reinforcement Learning) and QSPSO (Quantum-behaved Particle Swarm Optimization). Analyzed the performance and efficiency of these algorithms in various optimization scenarios.</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="projects" class="section">
+			<h2>Projects and Research</h2>
+			<div class="content">
+				<div class="content-item">
+					<h3>Particle Search Optimization using Reinforcement Learning</h3>
+					<p>Developing innovative algorithms to incorporate reinforcement learning methodologies into particle search optimization. Investigating the impact of reinforcement learning on search efficiency, convergence speed, and scalability of optimization algorithms.</p>
+				</div>
+				<div class="content-item">
+					<h3>Vivlr - Campus Mobile Application</h3>
+					<p>Engaged with Vivlr, a campus-focused mobile application revolutionizing the college experience by enabling students to seamlessly connect, explore events, and engage in their campus community.</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="skills" class="section">
+			<h2>Skills and Interests</h2>
+			<div class="skills">
+				<div class="skill-item">
+					<h3>Programming</h3>
+					<p>C++, Python, MySQL</p>
+				</div>
+				<div class="skill-item">
+					<h3>Product Management</h3>
+					<p>Experienced in product development and management</p>
+				</div>
+				<div class="skill-item">
+					<h3>Problem Solving</h3>
+					<p>Strong analytical and problem-solving skills</p>
+				</div>
+				<div class="skill-item">
+					<h3>Fast Learner</h3>
+					<p>Quick to adapt and learn new skills</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="contact" class="section">
+			<h2>Get in touch</h2>
+			<form class="contact-form" method="post" action="#">
+				<input type="text" name="name" placeholder="Your Name" required>
+				<input type="email" name="email" placeholder="Your Email" required>
+				<textarea name="message" placeholder="Your Message" rows="6" required></textarea>
+				<button type="submit">Send Message</button>
+			</form>
+		</section>
+
+		<footer>
+			<div class="social-icons">
+				<a href="https://www.linkedin.com/in/eti-dhanush-373160295" target="_blank">LinkedIn</a>
+				<a href="mailto:ed22csb0b18@student.nitw.ac.in">Email</a>
+			</div>
+			<p>&copy; 2024 Eti Dhanush. All rights reserved.</p>
+		</footer>
+	</div>
+
+	<script>
+		// Smooth scrolling for navigation links
+		document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+			anchor.addEventListener('click', function (e) {
+				e.preventDefault();
+				document.querySelector(this.getAttribute('href')).scrollIntoView({
+					behavior: 'smooth'
+				});
+			});
+		});
+
+		// Reveal sections on scroll
+		const sections = document.querySelectorAll('.section');
+		const revealSection = (entries, observer) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('visible');
+					observer.unobserve(entry.target);
+				}
+			});
+		};
+		const sectionObserver = new IntersectionObserver(revealSection, {
+			root: null,
+			threshold: 0.15,
+		});
+		sections.forEach(section => {
+			sectionObserver.observe(section);
+		});
+	</script>
+</body>
+</html>
